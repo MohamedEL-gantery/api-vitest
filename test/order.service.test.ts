@@ -216,5 +216,44 @@ describe("order service", () => {
       await expect(createOrder(order as never)).rejects.toThrow(message);
       expect(Order.create).not.toHaveBeenCalled();
     });
+
+    it("create order with createdAt", async () => {
+      const createdAt = "2026-01-15T10:00:00.000Z";
+
+      vi.mocked(Order.create).mockResolvedValue([]);
+
+      await createOrder({
+        courier: "INDRIVE",
+        products: [
+          {
+            name: "test",
+            price: 480,
+            quantity: 1,
+          },
+        ],
+        createdAt,
+      });
+
+      expect(Order.create).toHaveBeenCalledWith({
+        courier: "INDRIVE",
+        products: [
+          {
+            name: "test",
+            price: 480,
+            quantity: 1,
+          },
+        ],
+        createdAt: new Date(createdAt),
+      });
+    });
+
+    it("should reject null product item", async () => {
+      await expect(
+        createOrder({
+          courier: "INDRIVE",
+          products: [null as any],
+        }),
+      ).rejects.toThrow("must be an object");
+    });
   });
 });

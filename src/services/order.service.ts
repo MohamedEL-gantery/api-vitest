@@ -21,7 +21,7 @@ interface NewOrder {
   courier: Courier;
   products: NewOrderProduct[];
   status?: OrderStatus;
-  createdAt?: Date;
+  createdAt?: Date | string;
 }
 
 const parseProducts = (value: NewOrderProduct[]): NewOrderProduct[] => {
