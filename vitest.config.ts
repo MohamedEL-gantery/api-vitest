@@ -11,6 +11,7 @@ export default defineConfig({
 
     coverage: {
       provider: "v8", // or 'istanbul'
+      reportOnFailure: true,
       include: ["src/**/*.ts"],
       exclude: ["src/server.ts"],
       reporter: ["text", "html"],
