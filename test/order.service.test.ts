@@ -90,7 +90,7 @@ describe("order service", () => {
           {
             name: "test",
             price: 480,
-            quantity: 0,
+            quantity: 10,
           },
         ],
       });
